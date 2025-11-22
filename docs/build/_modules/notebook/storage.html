@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html lang="ru" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>notebook.storage &#8212; документация NoteManager 1.0</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=2bf1fcf8" />
+    
+    <script src="../../_static/documentation_options.js?v=9ca2116e"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/translations.js?v=cd1d70c9"></script>
+    
+    <link rel="index" title="Алфавитный указатель" href="../../genindex.html" />
+    <link rel="search" title="Поиск" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="Алфавитный указатель"
+             accesskey="I">указатель</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Содержание модулей Python"
+             >модули</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">документация NoteManager 1.0</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Код модуля</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">notebook.storage</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Исходный код notebook.storage</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Модуль для работы с хранилищем заметок.</span>
+
+<span class="sd">Обеспечивает сохранение, загрузку и управление данными заметок в JSON-файле.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Note</span><span class="p">,</span> <span class="n">NoteStatus</span><span class="p">,</span> <span class="n">NotePriority</span><span class="p">,</span> <span class="n">NoteCategory</span>
+
+
+<div class="viewcode-block" id="NoteStorage">
+<a class="viewcode-back" href="../../notebook.storage.html#notebook.NoteStorage">[документация]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">NoteStorage</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Класс для управления хранилищем заметок.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        filename (str): Имя файла для хранения данных.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;notes.json&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Инициализирует хранилище заметок.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            filename (str, optional): Имя файла для хранения. По умолчанию &quot;notes.json&quot;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">_ensure_file_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Создает файл для хранения, если он не существует.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">([],</span> <span class="n">f</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="NoteStorage.save_notes">
+<a class="viewcode-back" href="../../notebook.storage.html#notebook.NoteStorage.save_notes">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_notes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">notes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Сохраняет список заметок в файл.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            notes (List[Note]): Список объектов заметок для сохранения.</span>
+<span class="sd">            </span>
+<span class="sd">        Raises:</span>
+<span class="sd">            IOError: Если произошла ошибка при записи в файл.</span>
+<span class="sd">            PermissionError: Если нет прав для записи в файл.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ensure_file_exists</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">([</span><span class="n">note</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">],</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="NoteStorage.load_notes">
+<a class="viewcode-back" href="../../notebook.storage.html#notebook.NoteStorage.load_notes">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_notes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Загружает заметки из файла.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            List[Note]: Список загруженных заметок.</span>
+<span class="sd">            </span>
+<span class="sd">        Raises:</span>
+<span class="sd">            JSONDecodeError: Если файл содержит некорректный JSON.</span>
+<span class="sd">            KeyError: Если в данных отсутствуют обязательные поля.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ensure_file_exists</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+                <span class="k">return</span> <span class="p">[</span><span class="n">Note</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">note_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">note_data</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[]</span></div>
+
+    
+<div class="viewcode-block" id="NoteStorage.get_next_id">
+<a class="viewcode-back" href="../../notebook.storage.html#notebook.NoteStorage.get_next_id">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_next_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Генерирует следующий уникальный идентификатор для новой заметки.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            int: Следующий доступный ID.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">notes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_notes</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">notes</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span></div>
+
+    
+<div class="viewcode-block" id="NoteStorage.get_all_tags">
+<a class="viewcode-back" href="../../notebook.storage.html#notebook.NoteStorage.get_all_tags">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_all_tags</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Возвращает список всех уникальных тегов из всех заметок.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            List[str]: Отсортированный список уникальных тегов.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">notes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_notes</span><span class="p">()</span>
+        <span class="n">all_tags</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">:</span>
+            <span class="n">all_tags</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">tags</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">all_tags</span><span class="p">))</span></div>
+</div>
+
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="Алфавитный указатель"
+             >указатель</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Содержание модулей Python"
+             >модули</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">документация NoteManager 1.0</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Код модуля</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">notebook.storage</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Авторские права 2025, Rum.
+      Создано с использованием <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    </div>
+  </body>
+</html>

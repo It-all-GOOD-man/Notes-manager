@@ -1,10 +1,20 @@
-#!/usr/bin/env python3
+"""
+Главный модуль системы управления заметками.
+
+Предоставляет интерфейс командной строки для работы с заметками.
+"""
+
 import argparse
 import sys
 from notebook.storage import NoteStorage
 from notebook.commands import NoteCommands
 
+
 def main():
+    """Главная функция приложения.
+    
+    Обрабатывает аргументы командной строки и выполняет соответствующие команды.
+    """
     storage = NoteStorage()
     commands = NoteCommands(storage)
     
@@ -118,6 +128,7 @@ def main():
     except Exception as e:
         print(f"Ошибка: {e}")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()

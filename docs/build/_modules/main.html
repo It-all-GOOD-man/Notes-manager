@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html lang="ru" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>main &#8212; документация NoteManager 1.0</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
+    
+    <script src="../_static/documentation_options.js?v=9ca2116e"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=cd1d70c9"></script>
+    
+    <link rel="index" title="Алфавитный указатель" href="../genindex.html" />
+    <link rel="search" title="Поиск" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Алфавитный указатель"
+             accesskey="I">указатель</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Содержание модулей Python"
+             >модули</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">документация NoteManager 1.0</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Код модуля</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">main</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Исходный код main</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Главный модуль системы управления заметками.</span>
+
+<span class="sd">Предоставляет интерфейс командной строки для работы с заметками.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">notebook.storage</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoteStorage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">notebook.commands</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoteCommands</span>
+
+
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../main.html#main.main">[документация]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Главная функция приложения.</span>
+<span class="sd">    </span>
+<span class="sd">    Обрабатывает аргументы командной строки и выполняет соответствующие команды.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">storage</span> <span class="o">=</span> <span class="n">NoteStorage</span><span class="p">()</span>
+    <span class="n">commands</span> <span class="o">=</span> <span class="n">NoteCommands</span><span class="p">(</span><span class="n">storage</span><span class="p">)</span>
+    
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Блокнот - управление заметками&quot;</span><span class="p">)</span>
+    <span class="n">subparsers</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_subparsers</span><span class="p">(</span><span class="n">dest</span><span class="o">=</span><span class="s1">&#39;command&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Доступные команды&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Команда добавления</span>
+    <span class="n">add_parser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Добавить новую заметку&#39;</span><span class="p">)</span>
+    <span class="n">add_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Заголовок заметки&#39;</span><span class="p">)</span>
+    <span class="n">add_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Текст заметки&#39;</span><span class="p">)</span>
+    <span class="n">add_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39;--category&#39;</span><span class="p">,</span> 
+                          <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;work&#39;</span><span class="p">,</span> <span class="s1">&#39;personal&#39;</span><span class="p">,</span> <span class="s1">&#39;study&#39;</span><span class="p">,</span> <span class="s1">&#39;shopping&#39;</span><span class="p">,</span> <span class="s1">&#39;ideas&#39;</span><span class="p">,</span> <span class="s1">&#39;other&#39;</span><span class="p">],</span>
+                          <span class="n">default</span><span class="o">=</span><span class="s1">&#39;other&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Категория заметки&#39;</span><span class="p">)</span>
+    <span class="n">add_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="s1">&#39;--priority&#39;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">],</span> 
+                          <span class="n">default</span><span class="o">=</span><span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Приоритет заметки&#39;</span><span class="p">)</span>
+    <span class="n">add_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-t&#39;</span><span class="p">,</span> <span class="s1">&#39;--tags&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Теги через пробел&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Команда списка</span>
+    <span class="n">list_parser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Показать список заметок&#39;</span><span class="p">)</span>
+    <span class="n">list_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39;--category&#39;</span><span class="p">,</span> 
+                           <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;work&#39;</span><span class="p">,</span> <span class="s1">&#39;personal&#39;</span><span class="p">,</span> <span class="s1">&#39;study&#39;</span><span class="p">,</span> <span class="s1">&#39;shopping&#39;</span><span class="p">,</span> <span class="s1">&#39;ideas&#39;</span><span class="p">,</span> <span class="s1">&#39;other&#39;</span><span class="p">],</span>
+                           <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Фильтр по категории&#39;</span><span class="p">)</span>
+    <span class="n">list_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="s1">&#39;--priority&#39;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">],</span> 
+                           <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Фильтр по приоритету&#39;</span><span class="p">)</span>
+    <span class="n">list_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-s&#39;</span><span class="p">,</span> <span class="s1">&#39;--status&#39;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;active&#39;</span><span class="p">,</span> <span class="s1">&#39;archived&#39;</span><span class="p">],</span> 
+                           <span class="n">default</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Статус заметок&#39;</span><span class="p">)</span>
+    <span class="n">list_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--full&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> 
+                           <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Показать полное содержимое&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Команда поиска</span>
+    <span class="n">search_parser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s1">&#39;search&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Поиск заметок&#39;</span><span class="p">)</span>
+    <span class="n">search_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;search_term&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Текст для поиска&#39;</span><span class="p">)</span>
+    <span class="n">search_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--in&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;search_in&#39;</span><span class="p">,</span> 
+                             <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="s1">&#39;tags&#39;</span><span class="p">,</span> <span class="s1">&#39;all&#39;</span><span class="p">],</span>
+                             <span class="n">default</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Где искать&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Команда удаления</span>
+    <span class="n">delete_parser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s1">&#39;delete&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Удалить заметку&#39;</span><span class="p">)</span>
+    <span class="n">delete_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;note_id&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;ID заметки&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Команда архивации</span>
+    <span class="n">archive_parser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s1">&#39;archive&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Архивировать заметку&#39;</span><span class="p">)</span>
+    <span class="n">archive_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;note_id&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;ID заметки&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Команда редактирования</span>
+    <span class="n">edit_parser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s1">&#39;edit&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Редактировать заметку&#39;</span><span class="p">)</span>
+    <span class="n">edit_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;note_id&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;ID заметки&#39;</span><span class="p">)</span>
+    <span class="n">edit_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--title&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Новый заголовок&#39;</span><span class="p">)</span>
+    <span class="n">edit_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--content&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Новый текст&#39;</span><span class="p">)</span>
+    <span class="n">edit_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39;--category&#39;</span><span class="p">,</span> 
+                           <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;work&#39;</span><span class="p">,</span> <span class="s1">&#39;personal&#39;</span><span class="p">,</span> <span class="s1">&#39;study&#39;</span><span class="p">,</span> <span class="s1">&#39;shopping&#39;</span><span class="p">,</span> <span class="s1">&#39;ideas&#39;</span><span class="p">,</span> <span class="s1">&#39;other&#39;</span><span class="p">],</span>
+                           <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Новая категория&#39;</span><span class="p">)</span>
+    <span class="n">edit_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="s1">&#39;--priority&#39;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">],</span> 
+                           <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Новый приоритет&#39;</span><span class="p">)</span>
+    <span class="n">edit_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-t&#39;</span><span class="p">,</span> <span class="s1">&#39;--tags&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Новые теги&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Команда тегов</span>
+    <span class="n">tags_parser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s1">&#39;tags&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Показать все теги&#39;</span><span class="p">)</span>
+    
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">command</span><span class="p">:</span>
+        <span class="c1"># Если команда не указана, показываем справку и список заметок</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">print_help</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">commands</span><span class="o">.</span><span class="n">list_notes</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="k">return</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;add&#39;</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">commands</span><span class="o">.</span><span class="n">add_note</span><span class="p">(</span>
+                <span class="n">title</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+                <span class="n">content</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">content</span><span class="p">,</span>
+                <span class="n">category</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">category</span><span class="p">,</span>
+                <span class="n">priority</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">priority</span><span class="p">,</span>
+                <span class="n">tags</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">tags</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">args</span><span class="o">.</span><span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;list&#39;</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">commands</span><span class="o">.</span><span class="n">list_notes</span><span class="p">(</span>
+                <span class="n">category</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">category</span><span class="p">,</span>
+                <span class="n">priority</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">priority</span><span class="p">,</span>
+                <span class="n">status</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">status</span><span class="p">,</span>
+                <span class="n">show_content</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">full</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">args</span><span class="o">.</span><span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;search&#39;</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">commands</span><span class="o">.</span><span class="n">search_notes</span><span class="p">(</span>
+                <span class="n">search_term</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">search_term</span><span class="p">,</span>
+                <span class="n">search_in</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">search_in</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">args</span><span class="o">.</span><span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;delete&#39;</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">commands</span><span class="o">.</span><span class="n">delete_note</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">note_id</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">args</span><span class="o">.</span><span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;archive&#39;</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">commands</span><span class="o">.</span><span class="n">archive_note</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">note_id</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">args</span><span class="o">.</span><span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;edit&#39;</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">commands</span><span class="o">.</span><span class="n">edit_note</span><span class="p">(</span>
+                <span class="n">note_id</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">note_id</span><span class="p">,</span>
+                <span class="n">title</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+                <span class="n">content</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">content</span><span class="p">,</span>
+                <span class="n">category</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">category</span><span class="p">,</span>
+                <span class="n">priority</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">priority</span><span class="p">,</span>
+                <span class="n">tags</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">tags</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">args</span><span class="o">.</span><span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;tags&#39;</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">commands</span><span class="o">.</span><span class="n">list_tags</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;Неизвестная команда&quot;</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ошибка: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Алфавитный указатель"
+             >указатель</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Содержание модулей Python"
+             >модули</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">документация NoteManager 1.0</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Код модуля</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">main</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Авторские права 2025, Rum.
+      Создано с использованием <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+
+<html lang="ru" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>notebook.commands &#8212; документация NoteManager 1.0</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=2bf1fcf8" />
+    
+    <script src="../../_static/documentation_options.js?v=9ca2116e"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/translations.js?v=cd1d70c9"></script>
+    
+    <link rel="index" title="Алфавитный указатель" href="../../genindex.html" />
+    <link rel="search" title="Поиск" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="Алфавитный указатель"
+             accesskey="I">указатель</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Содержание модулей Python"
+             >модули</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">документация NoteManager 1.0</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Код модуля</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">notebook.commands</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Исходный код notebook.commands</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Модуль обработчиков команд для системы управления заметками.</span>
+
+<span class="sd">Содержит класс с методами для выполнения всех операций с заметками.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Note</span><span class="p">,</span> <span class="n">NoteStatus</span><span class="p">,</span> <span class="n">NotePriority</span><span class="p">,</span> <span class="n">NoteCategory</span>  <span class="c1"># Используем относительные импорты</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.storage</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoteStorage</span>  <span class="c1"># Используем относительные импорты</span>
+
+
+<div class="viewcode-block" id="NoteCommands">
+<a class="viewcode-back" href="../../notebook.commands.html#notebook.NoteCommands">[документация]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">NoteCommands</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Класс для обработки команд управления заметками.&quot;&quot;&quot;</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">storage</span><span class="p">:</span> <span class="n">NoteStorage</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Инициализирует обработчик команд.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            storage (NoteStorage): Объект хранилища заметок.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">storage</span> <span class="o">=</span> <span class="n">storage</span>
+    
+<div class="viewcode-block" id="NoteCommands.add_note">
+<a class="viewcode-back" href="../../notebook.commands.html#notebook.NoteCommands.add_note">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_note</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">category</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;other&quot;</span><span class="p">,</span> 
+                 <span class="n">priority</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;medium&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Добавляет новую заметку в хранилище.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            title (str): Заголовок заметки.</span>
+<span class="sd">            content (str): Текст заметки.</span>
+<span class="sd">            category (str, optional): Категория заметки. По умолчанию &quot;other&quot;.</span>
+<span class="sd">            priority (str, optional): Приоритет заметки. По умолчанию &quot;medium&quot;.</span>
+<span class="sd">            tags (List[str], optional): Список тегов. По умолчанию None.</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Сообщение о результате операции.</span>
+<span class="sd">            </span>
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: Если категория или приоритет имеют некорректное значение.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">notes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">load_notes</span><span class="p">()</span>
+        
+        <span class="c1"># Валидация категории</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">note_category</span> <span class="o">=</span> <span class="n">NoteCategory</span><span class="p">(</span><span class="n">category</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="n">valid_categories</span> <span class="o">=</span> <span class="p">[</span><span class="n">cat</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">cat</span> <span class="ow">in</span> <span class="n">NoteCategory</span><span class="p">]</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Ошибка: Неверная категория &#39;</span><span class="si">{</span><span class="n">category</span><span class="si">}</span><span class="s2">&#39;. Допустимые значения: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">valid_categories</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        
+        <span class="c1"># Валидация приоритета</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">note_priority</span> <span class="o">=</span> <span class="n">NotePriority</span><span class="p">(</span><span class="n">priority</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Ошибка: Неверный приоритет &#39;</span><span class="si">{</span><span class="n">priority</span><span class="si">}</span><span class="s2">&#39;. Допустимые значения: low, medium, high&quot;</span>
+        
+        <span class="n">new_note</span> <span class="o">=</span> <span class="n">Note</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">get_next_id</span><span class="p">(),</span>
+            <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
+            <span class="n">content</span><span class="o">=</span><span class="n">content</span><span class="p">,</span>
+            <span class="n">category</span><span class="o">=</span><span class="n">note_category</span><span class="p">,</span>
+            <span class="n">priority</span><span class="o">=</span><span class="n">note_priority</span><span class="p">,</span>
+            <span class="n">tags</span><span class="o">=</span><span class="n">tags</span> <span class="ow">or</span> <span class="p">[]</span>
+        <span class="p">)</span>
+        
+        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_note</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">save_notes</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Заметка добавлена (ID: </span><span class="si">{</span><span class="n">new_note</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span></div>
+
+    
+<div class="viewcode-block" id="NoteCommands.list_notes">
+<a class="viewcode-back" href="../../notebook.commands.html#notebook.NoteCommands.list_notes">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">list_notes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">priority</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> 
+                   <span class="n">status</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;active&quot;</span><span class="p">,</span> <span class="n">show_content</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Показывает список заметок с возможностью фильтрации.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            category (str, optional): Фильтр по категории.</span>
+<span class="sd">            priority (str, optional): Фильтр по приоритету.</span>
+<span class="sd">            status (str, optional): Фильтр по статусу. По умолчанию &quot;active&quot;.</span>
+<span class="sd">            show_content (bool, optional): Показывать полный текст. По умолчанию False.</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Отформатированный список заметок.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">notes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">load_notes</span><span class="p">()</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">notes</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Нет заметок&quot;</span>
+        
+        <span class="c1"># Фильтрация</span>
+        <span class="n">filtered_notes</span> <span class="o">=</span> <span class="n">notes</span>
+        
+        <span class="k">if</span> <span class="n">category</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">category_filter</span> <span class="o">=</span> <span class="n">NoteCategory</span><span class="p">(</span><span class="n">category</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+                <span class="n">filtered_notes</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">filtered_notes</span> <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">category</span> <span class="o">==</span> <span class="n">category_filter</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="n">valid_categories</span> <span class="o">=</span> <span class="p">[</span><span class="n">cat</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">cat</span> <span class="ow">in</span> <span class="n">NoteCategory</span><span class="p">]</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Ошибка: Неверная категория &#39;</span><span class="si">{</span><span class="n">category</span><span class="si">}</span><span class="s2">&#39;. Допустимые значения: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">valid_categories</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        
+        <span class="k">if</span> <span class="n">priority</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">priority_filter</span> <span class="o">=</span> <span class="n">NotePriority</span><span class="p">(</span><span class="n">priority</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+                <span class="n">filtered_notes</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">filtered_notes</span> <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">priority</span> <span class="o">==</span> <span class="n">priority_filter</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Ошибка: Неверный приоритет &#39;</span><span class="si">{</span><span class="n">priority</span><span class="si">}</span><span class="s2">&#39;. Допустимые значения: low, medium, high&quot;</span>
+        
+        <span class="k">if</span> <span class="n">status</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">status_filter</span> <span class="o">=</span> <span class="n">NoteStatus</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+                <span class="n">filtered_notes</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">filtered_notes</span> <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">status_filter</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Ошибка: Неверный статус &#39;</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&#39;. Допустимые значения: active, archived&quot;</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">filtered_notes</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Заметки не найдены по заданным критериям&quot;</span>
+        
+        <span class="c1"># Сортировка по дате создания (новые сначала)</span>
+        <span class="n">filtered_notes</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">created_at</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;=== Найдено заметок: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">filtered_notes</span><span class="p">)</span><span class="si">}</span><span class="s2"> ===&quot;</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">filtered_notes</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;─&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">show_content</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">content</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Полный текст: </span><span class="si">{</span><span class="n">note</span><span class="o">.</span><span class="n">content</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="NoteCommands.search_notes">
+<a class="viewcode-back" href="../../notebook.commands.html#notebook.NoteCommands.search_notes">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">search_notes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search_term</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">search_in</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Выполняет поиск заметок по ключевым словам.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            search_term (str): Текст для поиска.</span>
+<span class="sd">            search_in (str, optional): Область поиска. По умолчанию &quot;all&quot;.</span>
+<span class="sd">                Допустимые значения: &quot;title&quot;, &quot;content&quot;, &quot;tags&quot;, &quot;all&quot;.</span>
+<span class="sd">                </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Отформатированные результаты поиска.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">notes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">load_notes</span><span class="p">()</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">notes</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Нет заметок&quot;</span>
+        
+        <span class="n">search_term</span> <span class="o">=</span> <span class="n">search_term</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">found_notes</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">:</span>
+            <span class="n">matches</span> <span class="o">=</span> <span class="kc">False</span>
+            
+            <span class="k">if</span> <span class="n">search_in</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="s2">&quot;title&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">search_term</span> <span class="ow">in</span> <span class="n">note</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                <span class="n">matches</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">elif</span> <span class="n">search_in</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">search_term</span> <span class="ow">in</span> <span class="n">note</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                <span class="n">matches</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">elif</span> <span class="n">search_in</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="s2">&quot;tags&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">search_term</span> <span class="ow">in</span> <span class="n">tag</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">note</span><span class="o">.</span><span class="n">tags</span><span class="p">):</span>
+                <span class="n">matches</span> <span class="o">=</span> <span class="kc">True</span>
+            
+            <span class="k">if</span> <span class="n">matches</span><span class="p">:</span>
+                <span class="n">found_notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">found_notes</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Заметки по запросу &#39;</span><span class="si">{</span><span class="n">search_term</span><span class="si">}</span><span class="s2">&#39; не найдены&quot;</span>
+        
+        <span class="n">found_notes</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">created_at</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;=== Результаты поиска: &#39;</span><span class="si">{</span><span class="n">search_term</span><span class="si">}</span><span class="s2">&#39; (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">found_notes</span><span class="p">)</span><span class="si">}</span><span class="s2"> найдено) ===&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">found_notes</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;─&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
+        
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="NoteCommands.delete_note">
+<a class="viewcode-back" href="../../notebook.commands.html#notebook.NoteCommands.delete_note">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete_note</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">note_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Удаляет заметку по идентификатору.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            note_id (int): ID заметки для удаления.</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Сообщение о результате операции.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">notes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">load_notes</span><span class="p">()</span>
+        
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">note</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">notes</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">note</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">note_id</span><span class="p">:</span>
+                <span class="n">deleted_title</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">title</span>
+                <span class="k">del</span> <span class="n">notes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">save_notes</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Заметка удалена: #</span><span class="si">{</span><span class="n">note_id</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">deleted_title</span><span class="si">}</span><span class="s2">&quot;</span>
+        
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Ошибка: Заметка с ID #</span><span class="si">{</span><span class="n">note_id</span><span class="si">}</span><span class="s2"> не найдена&quot;</span></div>
+
+    
+<div class="viewcode-block" id="NoteCommands.archive_note">
+<a class="viewcode-back" href="../../notebook.commands.html#notebook.NoteCommands.archive_note">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">archive_note</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">note_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Перемещает заметку в архив.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            note_id (int): ID заметки для архивации.</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Сообщение о результате операции.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">notes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">load_notes</span><span class="p">()</span>
+        
+        <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">note</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">note_id</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">note</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">NoteStatus</span><span class="o">.</span><span class="n">ARCHIVED</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Заметка #</span><span class="si">{</span><span class="n">note_id</span><span class="si">}</span><span class="s2"> уже в архиве&quot;</span>
+                <span class="n">note</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">NoteStatus</span><span class="o">.</span><span class="n">ARCHIVED</span>
+                <span class="n">note</span><span class="o">.</span><span class="n">updated_at</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">save_notes</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Заметка архивирована: #</span><span class="si">{</span><span class="n">note_id</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">note</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span>
+        
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Ошибка: Заметка с ID #</span><span class="si">{</span><span class="n">note_id</span><span class="si">}</span><span class="s2"> не найдена&quot;</span></div>
+
+    
+<div class="viewcode-block" id="NoteCommands.edit_note">
+<a class="viewcode-back" href="../../notebook.commands.html#notebook.NoteCommands.edit_note">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">edit_note</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">note_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> 
+                  <span class="n">category</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">priority</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">tags</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Редактирует существующую заметку.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            note_id (int): ID редактируемой заметки.</span>
+<span class="sd">            title (str, optional): Новый заголовок.</span>
+<span class="sd">            content (str, optional): Новый текст.</span>
+<span class="sd">            category (str, optional): Новая категория.</span>
+<span class="sd">            priority (str, optional): Новый приоритет.</span>
+<span class="sd">            tags (List[str], optional): Новые теги.</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Сообщение о результате операции.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">notes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">load_notes</span><span class="p">()</span>
+        
+        <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">note</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">note_id</span><span class="p">:</span>
+                <span class="c1"># Валидация категории</span>
+                <span class="n">note_category</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">if</span> <span class="n">category</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">note_category</span> <span class="o">=</span> <span class="n">NoteCategory</span><span class="p">(</span><span class="n">category</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+                    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                        <span class="n">valid_categories</span> <span class="o">=</span> <span class="p">[</span><span class="n">cat</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">cat</span> <span class="ow">in</span> <span class="n">NoteCategory</span><span class="p">]</span>
+                        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Ошибка: Неверная категория &#39;</span><span class="si">{</span><span class="n">category</span><span class="si">}</span><span class="s2">&#39;. Допустимые значения: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">valid_categories</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+                
+                <span class="c1"># Валидация приоритета</span>
+                <span class="n">note_priority</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">if</span> <span class="n">priority</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">note_priority</span> <span class="o">=</span> <span class="n">NotePriority</span><span class="p">(</span><span class="n">priority</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+                    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Ошибка: Неверный приоритет &#39;</span><span class="si">{</span><span class="n">priority</span><span class="si">}</span><span class="s2">&#39;. Допустимые значения: low, medium, high&quot;</span>
+                
+                <span class="n">note</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+                    <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
+                    <span class="n">content</span><span class="o">=</span><span class="n">content</span><span class="p">,</span>
+                    <span class="n">category</span><span class="o">=</span><span class="n">note_category</span><span class="p">,</span>
+                    <span class="n">priority</span><span class="o">=</span><span class="n">note_priority</span><span class="p">,</span>
+                    <span class="n">tags</span><span class="o">=</span><span class="n">tags</span>
+                <span class="p">)</span>
+                
+                <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">save_notes</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Заметка обновлена: #</span><span class="si">{</span><span class="n">note_id</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">note</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span>
+        
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Ошибка: Заметка с ID #</span><span class="si">{</span><span class="n">note_id</span><span class="si">}</span><span class="s2"> не найдена&quot;</span></div>
+
+    
+<div class="viewcode-block" id="NoteCommands.list_tags">
+<a class="viewcode-back" href="../../notebook.commands.html#notebook.NoteCommands.list_tags">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">list_tags</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Показывает все используемые теги с количеством заметок.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Отформатированный список тегов.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tags</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">get_all_tags</span><span class="p">()</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">tags</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Теги не найдены&quot;</span>
+        
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;=== Все теги ===&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">tags</span><span class="p">:</span>
+            <span class="c1"># Находим заметки с этим тегом</span>
+            <span class="n">notes_with_tag</span> <span class="o">=</span> <span class="p">[</span><span class="n">note</span> <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">load_notes</span><span class="p">()</span> <span class="k">if</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">note</span><span class="o">.</span><span class="n">tags</span><span class="p">]</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;#</span><span class="si">{</span><span class="n">tag</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">notes_with_tag</span><span class="p">)</span><span class="si">}</span><span class="s2"> заметок)&quot;</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="Алфавитный указатель"
+             >указатель</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Содержание модулей Python"
+             >модули</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">документация NoteManager 1.0</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Код модуля</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">notebook.commands</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Авторские права 2025, Rum.
+      Создано с использованием <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    </div>
+  </body>
+</html>

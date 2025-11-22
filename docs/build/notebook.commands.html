@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html lang="ru" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>notebook.commands module &#8212; документация NoteManager 1.0</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=2bf1fcf8" />
+    
+    <script src="_static/documentation_options.js?v=9ca2116e"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=cd1d70c9"></script>
+    
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Алфавитный указатель"
+             accesskey="I">указатель</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Содержание модулей Python"
+             >модули</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация NoteManager 1.0</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">notebook.commands module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-notebook.commands">
+<span id="notebook-commands-module"></span><h1>notebook.commands module<a class="headerlink" href="#module-notebook.commands" title="Ссылка на этот заголовок">¶</a></h1>
+<p>Модуль обработчиков команд для системы управления заметками.</p>
+<p>Содержит класс с методами для выполнения всех операций с заметками.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="notebook.commands.NoteCommands">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">notebook.commands.</span></span><span class="sig-name descname"><span class="pre">NoteCommands</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">storage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="notebook.storage.html#notebook.storage.NoteStorage" title="notebook.storage.NoteStorage"><span class="pre">NoteStorage</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/notebook/commands.html#NoteCommands"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.commands.NoteCommands" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Класс для обработки команд управления заметками.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="notebook.commands.NoteCommands.add_note">
+<span class="sig-name descname"><span class="pre">add_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'other'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">priority</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'medium'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/notebook/commands.html#NoteCommands.add_note"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.commands.NoteCommands.add_note" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Добавляет новую заметку в хранилище.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title</strong> (<em>str</em>) – Заголовок заметки.</p></li>
+<li><p><strong>content</strong> (<em>str</em>) – Текст заметки.</p></li>
+<li><p><strong>category</strong> (<em>str</em><em>, </em><em>optional</em>) – Категория заметки. По умолчанию «other».</p></li>
+<li><p><strong>priority</strong> (<em>str</em><em>, </em><em>optional</em>) – Приоритет заметки. По умолчанию «medium».</p></li>
+<li><p><strong>tags</strong> (<em>List</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Список тегов. По умолчанию None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Сообщение о результате операции.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Если категория или приоритет имеют некорректное значение.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="notebook.commands.NoteCommands.archive_note">
+<span class="sig-name descname"><span class="pre">archive_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/notebook/commands.html#NoteCommands.archive_note"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.commands.NoteCommands.archive_note" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Перемещает заметку в архив.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>note_id</strong> (<em>int</em>) – ID заметки для архивации.</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Сообщение о результате операции.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="notebook.commands.NoteCommands.delete_note">
+<span class="sig-name descname"><span class="pre">delete_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/notebook/commands.html#NoteCommands.delete_note"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.commands.NoteCommands.delete_note" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Удаляет заметку по идентификатору.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>note_id</strong> (<em>int</em>) – ID заметки для удаления.</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Сообщение о результате операции.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="notebook.commands.NoteCommands.edit_note">
+<span class="sig-name descname"><span class="pre">edit_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">priority</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/notebook/commands.html#NoteCommands.edit_note"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.commands.NoteCommands.edit_note" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Редактирует существующую заметку.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>note_id</strong> (<em>int</em>) – ID редактируемой заметки.</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Новый заголовок.</p></li>
+<li><p><strong>content</strong> (<em>str</em><em>, </em><em>optional</em>) – Новый текст.</p></li>
+<li><p><strong>category</strong> (<em>str</em><em>, </em><em>optional</em>) – Новая категория.</p></li>
+<li><p><strong>priority</strong> (<em>str</em><em>, </em><em>optional</em>) – Новый приоритет.</p></li>
+<li><p><strong>tags</strong> (<em>List</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Новые теги.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Сообщение о результате операции.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="notebook.commands.NoteCommands.list_notes">
+<span class="sig-name descname"><span class="pre">list_notes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">priority</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'active'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/notebook/commands.html#NoteCommands.list_notes"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.commands.NoteCommands.list_notes" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Показывает список заметок с возможностью фильтрации.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>category</strong> (<em>str</em><em>, </em><em>optional</em>) – Фильтр по категории.</p></li>
+<li><p><strong>priority</strong> (<em>str</em><em>, </em><em>optional</em>) – Фильтр по приоритету.</p></li>
+<li><p><strong>status</strong> (<em>str</em><em>, </em><em>optional</em>) – Фильтр по статусу. По умолчанию «active».</p></li>
+<li><p><strong>show_content</strong> (<em>bool</em><em>, </em><em>optional</em>) – Показывать полный текст. По умолчанию False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Отформатированный список заметок.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="notebook.commands.NoteCommands.list_tags">
+<span class="sig-name descname"><span class="pre">list_tags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/notebook/commands.html#NoteCommands.list_tags"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.commands.NoteCommands.list_tags" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Показывает все используемые теги с количеством заметок.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Отформатированный список тегов.</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="notebook.commands.NoteCommands.search_notes">
+<span class="sig-name descname"><span class="pre">search_notes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">search_term</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'all'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/notebook/commands.html#NoteCommands.search_notes"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.commands.NoteCommands.search_notes" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Выполняет поиск заметок по ключевым словам.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>search_term</strong> (<em>str</em>) – Текст для поиска.</p></li>
+<li><p><strong>search_in</strong> (<em>str</em><em>, </em><em>optional</em>) – Область поиска. По умолчанию «all».
+Допустимые значения: «title», «content», «tags», «all».</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Отформатированные результаты поиска.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Оглавление</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">notebook.commands module</a><ul>
+<li><a class="reference internal" href="#notebook.commands.NoteCommands"><code class="docutils literal notranslate"><span class="pre">NoteCommands</span></code></a><ul>
+<li><a class="reference internal" href="#notebook.commands.NoteCommands.add_note"><code class="docutils literal notranslate"><span class="pre">NoteCommands.add_note()</span></code></a></li>
+<li><a class="reference internal" href="#notebook.commands.NoteCommands.archive_note"><code class="docutils literal notranslate"><span class="pre">NoteCommands.archive_note()</span></code></a></li>
+<li><a class="reference internal" href="#notebook.commands.NoteCommands.delete_note"><code class="docutils literal notranslate"><span class="pre">NoteCommands.delete_note()</span></code></a></li>
+<li><a class="reference internal" href="#notebook.commands.NoteCommands.edit_note"><code class="docutils literal notranslate"><span class="pre">NoteCommands.edit_note()</span></code></a></li>
+<li><a class="reference internal" href="#notebook.commands.NoteCommands.list_notes"><code class="docutils literal notranslate"><span class="pre">NoteCommands.list_notes()</span></code></a></li>
+<li><a class="reference internal" href="#notebook.commands.NoteCommands.list_tags"><code class="docutils literal notranslate"><span class="pre">NoteCommands.list_tags()</span></code></a></li>
+<li><a class="reference internal" href="#notebook.commands.NoteCommands.search_notes"><code class="docutils literal notranslate"><span class="pre">NoteCommands.search_notes()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>Эта страница</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/notebook.commands.rst.txt"
+            rel="nofollow">Исходный текст</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Алфавитный указатель"
+             >указатель</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Содержание модулей Python"
+             >модули</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация NoteManager 1.0</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">notebook.commands module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Авторские права 2025, Rum.
+      Создано с использованием <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    </div>
+  </body>
+</html>

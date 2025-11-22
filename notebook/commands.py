@@ -1,16 +1,45 @@
+"""
+Модуль обработчиков команд для системы управления заметками.
+
+Содержит класс с методами для выполнения всех операций с заметками.
+"""
+
+
 import argparse
 from typing import List
 from datetime import datetime
-from .models import Note, NoteStatus, NotePriority, NoteCategory
-from .storage import NoteStorage
+from .models import Note, NoteStatus, NotePriority, NoteCategory  # Используем относительные импорты
+from .storage import NoteStorage  # Используем относительные импорты
+
 
 class NoteCommands:
+    """Класс для обработки команд управления заметками."""
+    
     def __init__(self, storage: NoteStorage):
+        """Инициализирует обработчик команд.
+        
+        Args:
+            storage (NoteStorage): Объект хранилища заметок.
+        """
         self.storage = storage
     
     def add_note(self, title: str, content: str, category: str = "other", 
                  priority: str = "medium", tags: List[str] = None) -> str:
-        """Добавляет новую заметку"""
+        """Добавляет новую заметку в хранилище.
+        
+        Args:
+            title (str): Заголовок заметки.
+            content (str): Текст заметки.
+            category (str, optional): Категория заметки. По умолчанию "other".
+            priority (str, optional): Приоритет заметки. По умолчанию "medium".
+            tags (List[str], optional): Список тегов. По умолчанию None.
+            
+        Returns:
+            str: Сообщение о результате операции.
+            
+        Raises:
+            ValueError: Если категория или приоритет имеют некорректное значение.
+        """
         notes = self.storage.load_notes()
         
         # Валидация категории
@@ -41,7 +70,17 @@ class NoteCommands:
     
     def list_notes(self, category: str = None, priority: str = None, 
                    status: str = "active", show_content: bool = False) -> str:
-        """Показывает список заметок с фильтрацией"""
+        """Показывает список заметок с возможностью фильтрации.
+        
+        Args:
+            category (str, optional): Фильтр по категории.
+            priority (str, optional): Фильтр по приоритету.
+            status (str, optional): Фильтр по статусу. По умолчанию "active".
+            show_content (bool, optional): Показывать полный текст. По умолчанию False.
+            
+        Returns:
+            str: Отформатированный список заметок.
+        """
         notes = self.storage.load_notes()
         
         if not notes:
@@ -90,7 +129,16 @@ class NoteCommands:
         return "\n".join(result)
     
     def search_notes(self, search_term: str, search_in: str = "all") -> str:
-        """Поиск заметок по ключевым словам"""
+        """Выполняет поиск заметок по ключевым словам.
+        
+        Args:
+            search_term (str): Текст для поиска.
+            search_in (str, optional): Область поиска. По умолчанию "all".
+                Допустимые значения: "title", "content", "tags", "all".
+                
+        Returns:
+            str: Отформатированные результаты поиска.
+        """
         notes = self.storage.load_notes()
         
         if not notes:
@@ -115,7 +163,6 @@ class NoteCommands:
         if not found_notes:
             return f"Заметки по запросу '{search_term}' не найдены"
         
-        # Сортировка по релевантности (можно улучшить)
         found_notes.sort(key=lambda x: x.created_at, reverse=True)
         
         result = [f"=== Результаты поиска: '{search_term}' ({len(found_notes)} найдено) ==="]
@@ -126,7 +173,14 @@ class NoteCommands:
         return "\n".join(result)
     
     def delete_note(self, note_id: int) -> str:
-        """Удаляет заметку"""
+        """Удаляет заметку по идентификатору.
+        
+        Args:
+            note_id (int): ID заметки для удаления.
+            
+        Returns:
+            str: Сообщение о результате операции.
+        """
         notes = self.storage.load_notes()
         
         for i, note in enumerate(notes):
@@ -139,7 +193,14 @@ class NoteCommands:
         return f"Ошибка: Заметка с ID #{note_id} не найдена"
     
     def archive_note(self, note_id: int) -> str:
-        """Архивирует заметку"""
+        """Перемещает заметку в архив.
+        
+        Args:
+            note_id (int): ID заметки для архивации.
+            
+        Returns:
+            str: Сообщение о результате операции.
+        """
         notes = self.storage.load_notes()
         
         for note in notes:
@@ -155,7 +216,19 @@ class NoteCommands:
     
     def edit_note(self, note_id: int, title: str = None, content: str = None, 
                   category: str = None, priority: str = None, tags: List[str] = None) -> str:
-        """Редактирует существующую заметку"""
+        """Редактирует существующую заметку.
+        
+        Args:
+            note_id (int): ID редактируемой заметки.
+            title (str, optional): Новый заголовок.
+            content (str, optional): Новый текст.
+            category (str, optional): Новая категория.
+            priority (str, optional): Новый приоритет.
+            tags (List[str], optional): Новые теги.
+            
+        Returns:
+            str: Сообщение о результате операции.
+        """
         notes = self.storage.load_notes()
         
         for note in notes:
@@ -191,7 +264,11 @@ class NoteCommands:
         return f"Ошибка: Заметка с ID #{note_id} не найдена"
     
     def list_tags(self) -> str:
-        """Показывает все используемые теги"""
+        """Показывает все используемые теги с количеством заметок.
+        
+        Returns:
+            str: Отформатированный список тегов.
+        """
         tags = self.storage.get_all_tags()
         
         if not tags:

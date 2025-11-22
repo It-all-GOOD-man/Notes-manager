@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+
+<html lang="ru" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>notebook package &#8212; документация NoteManager 1.0</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=2bf1fcf8" />
+    
+    <script src="_static/documentation_options.js?v=9ca2116e"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=cd1d70c9"></script>
+    
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Алфавитный указатель"
+             accesskey="I">указатель</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Содержание модулей Python"
+             >модули</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация NoteManager 1.0</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">notebook package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="notebook-package">
+<h1>notebook package<a class="headerlink" href="#notebook-package" title="Ссылка на этот заголовок">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Ссылка на этот заголовок">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebook.commands.html">notebook.commands module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebook.commands.html#notebook.commands.NoteCommands"><code class="docutils literal notranslate"><span class="pre">NoteCommands</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebook.commands.html#notebook.commands.NoteCommands.add_note"><code class="docutils literal notranslate"><span class="pre">NoteCommands.add_note()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.commands.html#notebook.commands.NoteCommands.archive_note"><code class="docutils literal notranslate"><span class="pre">NoteCommands.archive_note()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.commands.html#notebook.commands.NoteCommands.delete_note"><code class="docutils literal notranslate"><span class="pre">NoteCommands.delete_note()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.commands.html#notebook.commands.NoteCommands.edit_note"><code class="docutils literal notranslate"><span class="pre">NoteCommands.edit_note()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.commands.html#notebook.commands.NoteCommands.list_notes"><code class="docutils literal notranslate"><span class="pre">NoteCommands.list_notes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.commands.html#notebook.commands.NoteCommands.list_tags"><code class="docutils literal notranslate"><span class="pre">NoteCommands.list_tags()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.commands.html#notebook.commands.NoteCommands.search_notes"><code class="docutils literal notranslate"><span class="pre">NoteCommands.search_notes()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebook.models.html">notebook.models module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebook.models.html#notebook.models.Note"><code class="docutils literal notranslate"><span class="pre">Note</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebook.models.html#notebook.models.Note.id"><code class="docutils literal notranslate"><span class="pre">Note.id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.models.html#notebook.models.Note.title"><code class="docutils literal notranslate"><span class="pre">Note.title</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.models.html#notebook.models.Note.content"><code class="docutils literal notranslate"><span class="pre">Note.content</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.models.html#notebook.models.Note.category"><code class="docutils literal notranslate"><span class="pre">Note.category</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.models.html#notebook.models.Note.priority"><code class="docutils literal notranslate"><span class="pre">Note.priority</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.models.html#notebook.models.Note.tags"><code class="docutils literal notranslate"><span class="pre">Note.tags</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.models.html#notebook.models.Note.status"><code class="docutils literal notranslate"><span class="pre">Note.status</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.models.html#notebook.models.Note.created_at"><code class="docutils literal notranslate"><span class="pre">Note.created_at</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.models.html#notebook.models.Note.updated_at"><code class="docutils literal notranslate"><span class="pre">Note.updated_at</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.models.html#notebook.models.Note.from_dict"><code class="docutils literal notranslate"><span class="pre">Note.from_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.models.html#notebook.models.Note.to_dict"><code class="docutils literal notranslate"><span class="pre">Note.to_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.models.html#notebook.models.Note.update"><code class="docutils literal notranslate"><span class="pre">Note.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebook.models.html#notebook.models.NoteCategory"><code class="docutils literal notranslate"><span class="pre">NoteCategory</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebook.models.html#notebook.models.NoteCategory.IDEAS"><code class="docutils literal notranslate"><span class="pre">NoteCategory.IDEAS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.models.html#notebook.models.NoteCategory.OTHER"><code class="docutils literal notranslate"><span class="pre">NoteCategory.OTHER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.models.html#notebook.models.NoteCategory.PERSONAL"><code class="docutils literal notranslate"><span class="pre">NoteCategory.PERSONAL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.models.html#notebook.models.NoteCategory.SHOPPING"><code class="docutils literal notranslate"><span class="pre">NoteCategory.SHOPPING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.models.html#notebook.models.NoteCategory.STUDY"><code class="docutils literal notranslate"><span class="pre">NoteCategory.STUDY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.models.html#notebook.models.NoteCategory.WORK"><code class="docutils literal notranslate"><span class="pre">NoteCategory.WORK</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebook.models.html#notebook.models.NotePriority"><code class="docutils literal notranslate"><span class="pre">NotePriority</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebook.models.html#notebook.models.NotePriority.HIGH"><code class="docutils literal notranslate"><span class="pre">NotePriority.HIGH</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.models.html#notebook.models.NotePriority.LOW"><code class="docutils literal notranslate"><span class="pre">NotePriority.LOW</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.models.html#notebook.models.NotePriority.MEDIUM"><code class="docutils literal notranslate"><span class="pre">NotePriority.MEDIUM</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebook.models.html#notebook.models.NoteStatus"><code class="docutils literal notranslate"><span class="pre">NoteStatus</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebook.models.html#notebook.models.NoteStatus.ACTIVE"><code class="docutils literal notranslate"><span class="pre">NoteStatus.ACTIVE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.models.html#notebook.models.NoteStatus.ARCHIVED"><code class="docutils literal notranslate"><span class="pre">NoteStatus.ARCHIVED</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebook.storage.html">notebook.storage module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebook.storage.html#notebook.storage.NoteStorage"><code class="docutils literal notranslate"><span class="pre">NoteStorage</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebook.storage.html#notebook.storage.NoteStorage.filename"><code class="docutils literal notranslate"><span class="pre">NoteStorage.filename</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.storage.html#notebook.storage.NoteStorage.get_all_tags"><code class="docutils literal notranslate"><span class="pre">NoteStorage.get_all_tags()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.storage.html#notebook.storage.NoteStorage.get_next_id"><code class="docutils literal notranslate"><span class="pre">NoteStorage.get_next_id()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.storage.html#notebook.storage.NoteStorage.load_notes"><code class="docutils literal notranslate"><span class="pre">NoteStorage.load_notes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebook.storage.html#notebook.storage.NoteStorage.save_notes"><code class="docutils literal notranslate"><span class="pre">NoteStorage.save_notes()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-notebook">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-notebook" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Notebook - пакет для управления заметками.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="notebook.Note">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">notebook.</span></span><span class="sig-name descname"><span class="pre">Note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">NoteCategory.OTHER</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">priority</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">NotePriority.MEDIUM</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">NoteStatus.ACTIVE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">created_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">updated_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/notebook/models.html#Note"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.Note" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Класс, представляющий заметку в системе.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notebook.Note.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#notebook.Note.id" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Уникальный идентификатор заметки.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notebook.Note.title">
+<span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#notebook.Note.title" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Заголовок заметки.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notebook.Note.content">
+<span class="sig-name descname"><span class="pre">content</span></span><a class="headerlink" href="#notebook.Note.content" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Текст заметки.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notebook.Note.category">
+<span class="sig-name descname"><span class="pre">category</span></span><a class="headerlink" href="#notebook.Note.category" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Категория заметки.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#notebook.NoteCategory" title="notebook.NoteCategory">NoteCategory</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notebook.Note.priority">
+<span class="sig-name descname"><span class="pre">priority</span></span><a class="headerlink" href="#notebook.Note.priority" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Приоритет заметки.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#notebook.NotePriority" title="notebook.NotePriority">NotePriority</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notebook.Note.tags">
+<span class="sig-name descname"><span class="pre">tags</span></span><a class="headerlink" href="#notebook.Note.tags" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Список тегов заметки.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notebook.Note.status">
+<span class="sig-name descname"><span class="pre">status</span></span><a class="headerlink" href="#notebook.Note.status" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Статус заметки.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#notebook.NoteStatus" title="notebook.NoteStatus">NoteStatus</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notebook.Note.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#notebook.Note.created_at" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Время создания в формате ISO.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notebook.Note.updated_at">
+<span class="sig-name descname"><span class="pre">updated_at</span></span><a class="headerlink" href="#notebook.Note.updated_at" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Время последнего обновления в формате ISO.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="notebook.Note.from_dict">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/notebook/models.html#Note.from_dict"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.Note.from_dict" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Создает объект заметки из словаря.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>dict</em>) – Словарь с данными заметки.</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Новый объект заметки.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#notebook.Note" title="notebook.Note">Note</a></p>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>KeyError</strong> – Если в словаре отсутствуют обязательные поля.</p></li>
+<li><p><strong>ValueError</strong> – Если значения категории, приоритета или статуса некорректны.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="notebook.Note.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/notebook/models.html#Note.to_dict"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.Note.to_dict" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Преобразует объект заметки в словарь для сериализации.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Словарь с данными заметки, готовый для сохранения в JSON.</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="notebook.Note.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">priority</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/notebook/models.html#Note.update"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.Note.update" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Обновляет данные заметки.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Новый заголовок.</p></li>
+<li><p><strong>content</strong> (<em>str</em><em>, </em><em>optional</em>) – Новый текст.</p></li>
+<li><p><strong>category</strong> (<a class="reference internal" href="#notebook.NoteCategory" title="notebook.NoteCategory"><em>NoteCategory</em></a><em>, </em><em>optional</em>) – Новая категория.</p></li>
+<li><p><strong>priority</strong> (<a class="reference internal" href="#notebook.NotePriority" title="notebook.NotePriority"><em>NotePriority</em></a><em>, </em><em>optional</em>) – Новый приоритет.</p></li>
+<li><p><strong>tags</strong> (<em>list</em><em>, </em><em>optional</em>) – Новый список тегов.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="notebook.NoteCategory">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">notebook.</span></span><span class="sig-name descname"><span class="pre">NoteCategory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/notebook/models.html#NoteCategory"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.NoteCategory" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Перечисление категорий заметок.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notebook.NoteCategory.IDEAS">
+<span class="sig-name descname"><span class="pre">IDEAS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ideas'</span></em><a class="headerlink" href="#notebook.NoteCategory.IDEAS" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notebook.NoteCategory.OTHER">
+<span class="sig-name descname"><span class="pre">OTHER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'other'</span></em><a class="headerlink" href="#notebook.NoteCategory.OTHER" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notebook.NoteCategory.PERSONAL">
+<span class="sig-name descname"><span class="pre">PERSONAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'personal'</span></em><a class="headerlink" href="#notebook.NoteCategory.PERSONAL" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notebook.NoteCategory.SHOPPING">
+<span class="sig-name descname"><span class="pre">SHOPPING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'shopping'</span></em><a class="headerlink" href="#notebook.NoteCategory.SHOPPING" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notebook.NoteCategory.STUDY">
+<span class="sig-name descname"><span class="pre">STUDY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'study'</span></em><a class="headerlink" href="#notebook.NoteCategory.STUDY" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notebook.NoteCategory.WORK">
+<span class="sig-name descname"><span class="pre">WORK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'work'</span></em><a class="headerlink" href="#notebook.NoteCategory.WORK" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="notebook.NoteCommands">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">notebook.</span></span><span class="sig-name descname"><span class="pre">NoteCommands</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">storage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="notebook.storage.html#notebook.storage.NoteStorage" title="notebook.storage.NoteStorage"><span class="pre">NoteStorage</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/notebook/commands.html#NoteCommands"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.NoteCommands" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Класс для обработки команд управления заметками.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="notebook.NoteCommands.add_note">
+<span class="sig-name descname"><span class="pre">add_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'other'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">priority</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'medium'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/notebook/commands.html#NoteCommands.add_note"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.NoteCommands.add_note" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Добавляет новую заметку в хранилище.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title</strong> (<em>str</em>) – Заголовок заметки.</p></li>
+<li><p><strong>content</strong> (<em>str</em>) – Текст заметки.</p></li>
+<li><p><strong>category</strong> (<em>str</em><em>, </em><em>optional</em>) – Категория заметки. По умолчанию «other».</p></li>
+<li><p><strong>priority</strong> (<em>str</em><em>, </em><em>optional</em>) – Приоритет заметки. По умолчанию «medium».</p></li>
+<li><p><strong>tags</strong> (<em>List</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Список тегов. По умолчанию None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Сообщение о результате операции.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Если категория или приоритет имеют некорректное значение.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="notebook.NoteCommands.archive_note">
+<span class="sig-name descname"><span class="pre">archive_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/notebook/commands.html#NoteCommands.archive_note"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.NoteCommands.archive_note" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Перемещает заметку в архив.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>note_id</strong> (<em>int</em>) – ID заметки для архивации.</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Сообщение о результате операции.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="notebook.NoteCommands.delete_note">
+<span class="sig-name descname"><span class="pre">delete_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/notebook/commands.html#NoteCommands.delete_note"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.NoteCommands.delete_note" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Удаляет заметку по идентификатору.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>note_id</strong> (<em>int</em>) – ID заметки для удаления.</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Сообщение о результате операции.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="notebook.NoteCommands.edit_note">
+<span class="sig-name descname"><span class="pre">edit_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">priority</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/notebook/commands.html#NoteCommands.edit_note"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.NoteCommands.edit_note" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Редактирует существующую заметку.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>note_id</strong> (<em>int</em>) – ID редактируемой заметки.</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Новый заголовок.</p></li>
+<li><p><strong>content</strong> (<em>str</em><em>, </em><em>optional</em>) – Новый текст.</p></li>
+<li><p><strong>category</strong> (<em>str</em><em>, </em><em>optional</em>) – Новая категория.</p></li>
+<li><p><strong>priority</strong> (<em>str</em><em>, </em><em>optional</em>) – Новый приоритет.</p></li>
+<li><p><strong>tags</strong> (<em>List</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Новые теги.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Сообщение о результате операции.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="notebook.NoteCommands.list_notes">
+<span class="sig-name descname"><span class="pre">list_notes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">priority</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'active'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/notebook/commands.html#NoteCommands.list_notes"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.NoteCommands.list_notes" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Показывает список заметок с возможностью фильтрации.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>category</strong> (<em>str</em><em>, </em><em>optional</em>) – Фильтр по категории.</p></li>
+<li><p><strong>priority</strong> (<em>str</em><em>, </em><em>optional</em>) – Фильтр по приоритету.</p></li>
+<li><p><strong>status</strong> (<em>str</em><em>, </em><em>optional</em>) – Фильтр по статусу. По умолчанию «active».</p></li>
+<li><p><strong>show_content</strong> (<em>bool</em><em>, </em><em>optional</em>) – Показывать полный текст. По умолчанию False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Отформатированный список заметок.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="notebook.NoteCommands.list_tags">
+<span class="sig-name descname"><span class="pre">list_tags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/notebook/commands.html#NoteCommands.list_tags"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.NoteCommands.list_tags" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Показывает все используемые теги с количеством заметок.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Отформатированный список тегов.</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="notebook.NoteCommands.search_notes">
+<span class="sig-name descname"><span class="pre">search_notes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">search_term</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'all'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/notebook/commands.html#NoteCommands.search_notes"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.NoteCommands.search_notes" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Выполняет поиск заметок по ключевым словам.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>search_term</strong> (<em>str</em>) – Текст для поиска.</p></li>
+<li><p><strong>search_in</strong> (<em>str</em><em>, </em><em>optional</em>) – Область поиска. По умолчанию «all».
+Допустимые значения: «title», «content», «tags», «all».</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Отформатированные результаты поиска.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="notebook.NotePriority">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">notebook.</span></span><span class="sig-name descname"><span class="pre">NotePriority</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/notebook/models.html#NotePriority"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.NotePriority" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Перечисление уровней приоритета заметки.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notebook.NotePriority.HIGH">
+<span class="sig-name descname"><span class="pre">HIGH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'high'</span></em><a class="headerlink" href="#notebook.NotePriority.HIGH" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notebook.NotePriority.LOW">
+<span class="sig-name descname"><span class="pre">LOW</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'low'</span></em><a class="headerlink" href="#notebook.NotePriority.LOW" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notebook.NotePriority.MEDIUM">
+<span class="sig-name descname"><span class="pre">MEDIUM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'medium'</span></em><a class="headerlink" href="#notebook.NotePriority.MEDIUM" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="notebook.NoteStatus">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">notebook.</span></span><span class="sig-name descname"><span class="pre">NoteStatus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/notebook/models.html#NoteStatus"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.NoteStatus" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Перечисление статусов заметки.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notebook.NoteStatus.ACTIVE">
+<span class="sig-name descname"><span class="pre">ACTIVE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'active'</span></em><a class="headerlink" href="#notebook.NoteStatus.ACTIVE" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notebook.NoteStatus.ARCHIVED">
+<span class="sig-name descname"><span class="pre">ARCHIVED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'archived'</span></em><a class="headerlink" href="#notebook.NoteStatus.ARCHIVED" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="notebook.NoteStorage">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">notebook.</span></span><span class="sig-name descname"><span class="pre">NoteStorage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'notes.json'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/notebook/storage.html#NoteStorage"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.NoteStorage" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Класс для управления хранилищем заметок.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notebook.NoteStorage.filename">
+<span class="sig-name descname"><span class="pre">filename</span></span><a class="headerlink" href="#notebook.NoteStorage.filename" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Имя файла для хранения данных.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="notebook.NoteStorage.get_all_tags">
+<span class="sig-name descname"><span class="pre">get_all_tags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/notebook/storage.html#NoteStorage.get_all_tags"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.NoteStorage.get_all_tags" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Возвращает список всех уникальных тегов из всех заметок.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Отсортированный список уникальных тегов.</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="notebook.NoteStorage.get_next_id">
+<span class="sig-name descname"><span class="pre">get_next_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/notebook/storage.html#NoteStorage.get_next_id"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.NoteStorage.get_next_id" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Генерирует следующий уникальный идентификатор для новой заметки.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Следующий доступный ID.</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="notebook.NoteStorage.load_notes">
+<span class="sig-name descname"><span class="pre">load_notes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="notebook.models.html#notebook.models.Note" title="notebook.models.Note"><span class="pre">Note</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/notebook/storage.html#NoteStorage.load_notes"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.NoteStorage.load_notes" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Загружает заметки из файла.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Список загруженных заметок.</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[<a class="reference internal" href="#notebook.Note" title="notebook.Note">Note</a>]</p>
+</dd>
+<dt class="field-odd">Исключение<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>JSONDecodeError</strong> – Если файл содержит некорректный JSON.</p></li>
+<li><p><strong>KeyError</strong> – Если в данных отсутствуют обязательные поля.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="notebook.NoteStorage.save_notes">
+<span class="sig-name descname"><span class="pre">save_notes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="notebook.models.html#notebook.models.Note" title="notebook.models.Note"><span class="pre">Note</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/notebook/storage.html#NoteStorage.save_notes"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#notebook.NoteStorage.save_notes" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Сохраняет список заметок в файл.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>notes</strong> (<em>List</em><em>[</em><a class="reference internal" href="#notebook.Note" title="notebook.Note"><em>Note</em></a><em>]</em>) – Список объектов заметок для сохранения.</p>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>IOError</strong> – Если произошла ошибка при записи в файл.</p></li>
+<li><p><strong>PermissionError</strong> – Если нет прав для записи в файл.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Оглавление</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">notebook package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-notebook">Module contents</a><ul>
+<li><a class="reference internal" href="#notebook.Note"><code class="docutils literal notranslate"><span class="pre">Note</span></code></a><ul>
+<li><a class="reference internal" href="#notebook.Note.id"><code class="docutils literal notranslate"><span class="pre">Note.id</span></code></a></li>
+<li><a class="reference internal" href="#notebook.Note.title"><code class="docutils literal notranslate"><span class="pre">Note.title</span></code></a></li>
+<li><a class="reference internal" href="#notebook.Note.content"><code class="docutils literal notranslate"><span class="pre">Note.content</span></code></a></li>
+<li><a class="reference internal" href="#notebook.Note.category"><code class="docutils literal notranslate"><span class="pre">Note.category</span></code></a></li>
+<li><a class="reference internal" href="#notebook.Note.priority"><code class="docutils literal notranslate"><span class="pre">Note.priority</span></code></a></li>
+<li><a class="reference internal" href="#notebook.Note.tags"><code class="docutils literal notranslate"><span class="pre">Note.tags</span></code></a></li>
+<li><a class="reference internal" href="#notebook.Note.status"><code class="docutils literal notranslate"><span class="pre">Note.status</span></code></a></li>
+<li><a class="reference internal" href="#notebook.Note.created_at"><code class="docutils literal notranslate"><span class="pre">Note.created_at</span></code></a></li>
+<li><a class="reference internal" href="#notebook.Note.updated_at"><code class="docutils literal notranslate"><span class="pre">Note.updated_at</span></code></a></li>
+<li><a class="reference internal" href="#notebook.Note.from_dict"><code class="docutils literal notranslate"><span class="pre">Note.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#notebook.Note.to_dict"><code class="docutils literal notranslate"><span class="pre">Note.to_dict()</span></code></a></li>
+<li><a class="reference internal" href="#notebook.Note.update"><code class="docutils literal notranslate"><span class="pre">Note.update()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#notebook.NoteCategory"><code class="docutils literal notranslate"><span class="pre">NoteCategory</span></code></a><ul>
+<li><a class="reference internal" href="#notebook.NoteCategory.IDEAS"><code class="docutils literal notranslate"><span class="pre">NoteCategory.IDEAS</span></code></a></li>
+<li><a class="reference internal" href="#notebook.NoteCategory.OTHER"><code class="docutils literal notranslate"><span class="pre">NoteCategory.OTHER</span></code></a></li>
+<li><a class="reference internal" href="#notebook.NoteCategory.PERSONAL"><code class="docutils literal notranslate"><span class="pre">NoteCategory.PERSONAL</span></code></a></li>
+<li><a class="reference internal" href="#notebook.NoteCategory.SHOPPING"><code class="docutils literal notranslate"><span class="pre">NoteCategory.SHOPPING</span></code></a></li>
+<li><a class="reference internal" href="#notebook.NoteCategory.STUDY"><code class="docutils literal notranslate"><span class="pre">NoteCategory.STUDY</span></code></a></li>
+<li><a class="reference internal" href="#notebook.NoteCategory.WORK"><code class="docutils literal notranslate"><span class="pre">NoteCategory.WORK</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#notebook.NoteCommands"><code class="docutils literal notranslate"><span class="pre">NoteCommands</span></code></a><ul>
+<li><a class="reference internal" href="#notebook.NoteCommands.add_note"><code class="docutils literal notranslate"><span class="pre">NoteCommands.add_note()</span></code></a></li>
+<li><a class="reference internal" href="#notebook.NoteCommands.archive_note"><code class="docutils literal notranslate"><span class="pre">NoteCommands.archive_note()</span></code></a></li>
+<li><a class="reference internal" href="#notebook.NoteCommands.delete_note"><code class="docutils literal notranslate"><span class="pre">NoteCommands.delete_note()</span></code></a></li>
+<li><a class="reference internal" href="#notebook.NoteCommands.edit_note"><code class="docutils literal notranslate"><span class="pre">NoteCommands.edit_note()</span></code></a></li>
+<li><a class="reference internal" href="#notebook.NoteCommands.list_notes"><code class="docutils literal notranslate"><span class="pre">NoteCommands.list_notes()</span></code></a></li>
+<li><a class="reference internal" href="#notebook.NoteCommands.list_tags"><code class="docutils literal notranslate"><span class="pre">NoteCommands.list_tags()</span></code></a></li>
+<li><a class="reference internal" href="#notebook.NoteCommands.search_notes"><code class="docutils literal notranslate"><span class="pre">NoteCommands.search_notes()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#notebook.NotePriority"><code class="docutils literal notranslate"><span class="pre">NotePriority</span></code></a><ul>
+<li><a class="reference internal" href="#notebook.NotePriority.HIGH"><code class="docutils literal notranslate"><span class="pre">NotePriority.HIGH</span></code></a></li>
+<li><a class="reference internal" href="#notebook.NotePriority.LOW"><code class="docutils literal notranslate"><span class="pre">NotePriority.LOW</span></code></a></li>
+<li><a class="reference internal" href="#notebook.NotePriority.MEDIUM"><code class="docutils literal notranslate"><span class="pre">NotePriority.MEDIUM</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#notebook.NoteStatus"><code class="docutils literal notranslate"><span class="pre">NoteStatus</span></code></a><ul>
+<li><a class="reference internal" href="#notebook.NoteStatus.ACTIVE"><code class="docutils literal notranslate"><span class="pre">NoteStatus.ACTIVE</span></code></a></li>
+<li><a class="reference internal" href="#notebook.NoteStatus.ARCHIVED"><code class="docutils literal notranslate"><span class="pre">NoteStatus.ARCHIVED</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#notebook.NoteStorage"><code class="docutils literal notranslate"><span class="pre">NoteStorage</span></code></a><ul>
+<li><a class="reference internal" href="#notebook.NoteStorage.filename"><code class="docutils literal notranslate"><span class="pre">NoteStorage.filename</span></code></a></li>
+<li><a class="reference internal" href="#notebook.NoteStorage.get_all_tags"><code class="docutils literal notranslate"><span class="pre">NoteStorage.get_all_tags()</span></code></a></li>
+<li><a class="reference internal" href="#notebook.NoteStorage.get_next_id"><code class="docutils literal notranslate"><span class="pre">NoteStorage.get_next_id()</span></code></a></li>
+<li><a class="reference internal" href="#notebook.NoteStorage.load_notes"><code class="docutils literal notranslate"><span class="pre">NoteStorage.load_notes()</span></code></a></li>
+<li><a class="reference internal" href="#notebook.NoteStorage.save_notes"><code class="docutils literal notranslate"><span class="pre">NoteStorage.save_notes()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>Эта страница</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/notebook.rst.txt"
+            rel="nofollow">Исходный текст</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Алфавитный указатель"
+             >указатель</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Содержание модулей Python"
+             >модули</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">документация NoteManager 1.0</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">notebook package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Авторские права 2025, Rum.
+      Создано с использованием <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    </div>
+  </body>
+</html>

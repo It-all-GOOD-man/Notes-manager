@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html lang="ru" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>notebook.models &#8212; документация NoteManager 1.0</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=2bf1fcf8" />
+    
+    <script src="../../_static/documentation_options.js?v=9ca2116e"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/translations.js?v=cd1d70c9"></script>
+    
+    <link rel="index" title="Алфавитный указатель" href="../../genindex.html" />
+    <link rel="search" title="Поиск" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="Алфавитный указатель"
+             accesskey="I">указатель</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Содержание модулей Python"
+             >модули</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">документация NoteManager 1.0</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Код модуля</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">notebook.models</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Исходный код notebook.models</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Модуль моделей данных для системы управления заметками.</span>
+
+<span class="sd">Содержит классы для представления заметок, их статусов, приоритетов и категорий.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+
+
+<div class="viewcode-block" id="NoteStatus">
+<a class="viewcode-back" href="../../notebook.models.html#notebook.NoteStatus">[документация]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">NoteStatus</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Перечисление статусов заметки.&quot;&quot;&quot;</span>
+    
+    <span class="n">ACTIVE</span> <span class="o">=</span> <span class="s2">&quot;active&quot;</span>
+    <span class="n">ARCHIVED</span> <span class="o">=</span> <span class="s2">&quot;archived&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="NotePriority">
+<a class="viewcode-back" href="../../notebook.models.html#notebook.NotePriority">[документация]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">NotePriority</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Перечисление уровней приоритета заметки.&quot;&quot;&quot;</span>
+    
+    <span class="n">LOW</span> <span class="o">=</span> <span class="s2">&quot;low&quot;</span>
+    <span class="n">MEDIUM</span> <span class="o">=</span> <span class="s2">&quot;medium&quot;</span>
+    <span class="n">HIGH</span> <span class="o">=</span> <span class="s2">&quot;high&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="NoteCategory">
+<a class="viewcode-back" href="../../notebook.models.html#notebook.NoteCategory">[документация]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">NoteCategory</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Перечисление категорий заметок.&quot;&quot;&quot;</span>
+    
+    <span class="n">WORK</span> <span class="o">=</span> <span class="s2">&quot;work&quot;</span>
+    <span class="n">PERSONAL</span> <span class="o">=</span> <span class="s2">&quot;personal&quot;</span>
+    <span class="n">STUDY</span> <span class="o">=</span> <span class="s2">&quot;study&quot;</span>
+    <span class="n">SHOPPING</span> <span class="o">=</span> <span class="s2">&quot;shopping&quot;</span>
+    <span class="n">IDEAS</span> <span class="o">=</span> <span class="s2">&quot;ideas&quot;</span>
+    <span class="n">OTHER</span> <span class="o">=</span> <span class="s2">&quot;other&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="Note">
+<a class="viewcode-back" href="../../notebook.models.html#notebook.Note">[документация]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Note</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Класс, представляющий заметку в системе.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        id (int): Уникальный идентификатор заметки.</span>
+<span class="sd">        title (str): Заголовок заметки.</span>
+<span class="sd">        content (str): Текст заметки.</span>
+<span class="sd">        category (NoteCategory): Категория заметки.</span>
+<span class="sd">        priority (NotePriority): Приоритет заметки.</span>
+<span class="sd">        tags (list): Список тегов заметки.</span>
+<span class="sd">        status (NoteStatus): Статус заметки.</span>
+<span class="sd">        created_at (str): Время создания в формате ISO.</span>
+<span class="sd">        updated_at (str): Время последнего обновления в формате ISO.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">NoteCategory</span><span class="o">.</span><span class="n">OTHER</span><span class="p">,</span> 
+                 <span class="n">priority</span><span class="o">=</span><span class="n">NotePriority</span><span class="o">.</span><span class="n">MEDIUM</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">NoteStatus</span><span class="o">.</span><span class="n">ACTIVE</span><span class="p">,</span>
+                 <span class="n">created_at</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">updated_at</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Инициализирует новую заметку.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            id (int): Уникальный идентификатор заметки.</span>
+<span class="sd">            title (str): Заголовок заметки.</span>
+<span class="sd">            content (str): Текст заметки.</span>
+<span class="sd">            category (NoteCategory, optional): Категория заметки. По умолчанию OTHER.</span>
+<span class="sd">            priority (NotePriority, optional): Приоритет заметки. По умолчанию MEDIUM.</span>
+<span class="sd">            tags (list, optional): Список тегов. По умолчанию пустой список.</span>
+<span class="sd">            status (NoteStatus, optional): Статус заметки. По умолчанию ACTIVE.</span>
+<span class="sd">            created_at (str, optional): Время создания. По умолчанию текущее время.</span>
+<span class="sd">            updated_at (str, optional): Время обновления. По умолчанию текущее время.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">content</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">category</span> <span class="o">=</span> <span class="n">category</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">priority</span> <span class="o">=</span> <span class="n">priority</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tags</span> <span class="o">=</span> <span class="n">tags</span> <span class="ow">or</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">status</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">created_at</span> <span class="o">=</span> <span class="n">created_at</span> <span class="ow">or</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">updated_at</span> <span class="o">=</span> <span class="n">updated_at</span> <span class="ow">or</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+    
+<div class="viewcode-block" id="Note.to_dict">
+<a class="viewcode-back" href="../../notebook.models.html#notebook.Note.to_dict">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Преобразует объект заметки в словарь для сериализации.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Словарь с данными заметки, готовый для сохранения в JSON.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+            <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span>
+            <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="s1">&#39;priority&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">priority</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="s1">&#39;tags&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">,</span>
+            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">created_at</span><span class="p">,</span>
+            <span class="s1">&#39;updated_at&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">updated_at</span>
+        <span class="p">}</span></div>
+
+    
+<div class="viewcode-block" id="Note.from_dict">
+<a class="viewcode-back" href="../../notebook.models.html#notebook.Note.from_dict">[документация]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Создает объект заметки из словаря.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            data (dict): Словарь с данными заметки.</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Note: Новый объект заметки.</span>
+<span class="sd">            </span>
+<span class="sd">        Raises:</span>
+<span class="sd">            KeyError: Если в словаре отсутствуют обязательные поля.</span>
+<span class="sd">            ValueError: Если значения категории, приоритета или статуса некорректны.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+            <span class="n">title</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">],</span>
+            <span class="n">content</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">],</span>
+            <span class="n">category</span><span class="o">=</span><span class="n">NoteCategory</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;category&#39;</span><span class="p">]),</span>
+            <span class="n">priority</span><span class="o">=</span><span class="n">NotePriority</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;priority&#39;</span><span class="p">]),</span>
+            <span class="n">tags</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tags&#39;</span><span class="p">,</span> <span class="p">[]),</span>
+            <span class="n">status</span><span class="o">=</span><span class="n">NoteStatus</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]),</span>
+            <span class="n">created_at</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;created_at&#39;</span><span class="p">),</span>
+            <span class="n">updated_at</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;updated_at&#39;</span><span class="p">)</span>
+        <span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Note.update">
+<a class="viewcode-back" href="../../notebook.models.html#notebook.Note.update">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Обновляет данные заметки.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            title (str, optional): Новый заголовок.</span>
+<span class="sd">            content (str, optional): Новый текст.</span>
+<span class="sd">            category (NoteCategory, optional): Новая категория.</span>
+<span class="sd">            priority (NotePriority, optional): Новый приоритет.</span>
+<span class="sd">            tags (list, optional): Новый список тегов.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">title</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="k">if</span> <span class="n">content</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">content</span>
+        <span class="k">if</span> <span class="n">category</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">category</span> <span class="o">=</span> <span class="n">category</span>
+        <span class="k">if</span> <span class="n">priority</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">priority</span> <span class="o">=</span> <span class="n">priority</span>
+        <span class="k">if</span> <span class="n">tags</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tags</span> <span class="o">=</span> <span class="n">tags</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">updated_at</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span></div>
+
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Возвращает строковое представление заметки.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Форматированное строковое представление заметки.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">status_icon</span> <span class="o">=</span> <span class="s2">&quot;📁&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">NoteStatus</span><span class="o">.</span><span class="n">ARCHIVED</span> <span class="k">else</span> <span class="s2">&quot;📝&quot;</span>
+        <span class="n">priority_icon</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">NotePriority</span><span class="o">.</span><span class="n">LOW</span><span class="p">:</span> <span class="s2">&quot;⬇&quot;</span><span class="p">,</span>
+            <span class="n">NotePriority</span><span class="o">.</span><span class="n">MEDIUM</span><span class="p">:</span> <span class="s2">&quot;●&quot;</span><span class="p">,</span>
+            <span class="n">NotePriority</span><span class="o">.</span><span class="n">HIGH</span><span class="p">:</span> <span class="s2">&quot;⬆&quot;</span>
+        <span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">priority</span><span class="p">,</span> <span class="s2">&quot;●&quot;</span><span class="p">)</span>
+        
+        <span class="n">category_icon</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">NoteCategory</span><span class="o">.</span><span class="n">WORK</span><span class="p">:</span> <span class="s2">&quot;💼&quot;</span><span class="p">,</span>
+            <span class="n">NoteCategory</span><span class="o">.</span><span class="n">PERSONAL</span><span class="p">:</span> <span class="s2">&quot;👤&quot;</span><span class="p">,</span>
+            <span class="n">NoteCategory</span><span class="o">.</span><span class="n">STUDY</span><span class="p">:</span> <span class="s2">&quot;📚&quot;</span><span class="p">,</span>
+            <span class="n">NoteCategory</span><span class="o">.</span><span class="n">SHOPPING</span><span class="p">:</span> <span class="s2">&quot;🛒&quot;</span><span class="p">,</span>
+            <span class="n">NoteCategory</span><span class="o">.</span><span class="n">IDEAS</span><span class="p">:</span> <span class="s2">&quot;💡&quot;</span><span class="p">,</span>
+            <span class="n">NoteCategory</span><span class="o">.</span><span class="n">OTHER</span><span class="p">:</span> <span class="s2">&quot;📄&quot;</span>
+        <span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="p">,</span> <span class="s2">&quot;📄&quot;</span><span class="p">)</span>
+        
+        <span class="n">tags_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot; | Tags: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tags</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">created</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">created_at</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">.%m.%Y&quot;</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">status_icon</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="n">priority_icon</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">category_icon</span><span class="si">}</span><span class="s2"> #</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;   Created: </span><span class="si">{</span><span class="n">created</span><span class="si">}{</span><span class="n">tags_str</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;   </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span><span class="si">}{</span><span class="s1">&#39;...&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Навигация</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="Алфавитный указатель"
+             >указатель</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Содержание модулей Python"
+             >модули</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">документация NoteManager 1.0</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Код модуля</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">notebook.models</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Авторские права 2025, Rum.
+      Создано с использованием <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    </div>
+  </body>
+</html>
